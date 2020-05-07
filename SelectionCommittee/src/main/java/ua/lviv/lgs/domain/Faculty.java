@@ -19,7 +19,7 @@ public class Faculty {
 	private Integer id;
 	
 	@Column(name = "faculty_name")
-	private FacultyName name;
+	private String name;
 	
 	@Column(name = "qty_of_students")
 	private int qtyOfStudents;
@@ -30,18 +30,18 @@ public class Faculty {
 	public Faculty() {
 	}
 
-	public Faculty(int qtyOfStudents, FacultyName name, List<Subjects> subjects) {
+	public Faculty(String name, int qtyOfStudents, List<Subjects> subjects) {
 
-		this.qtyOfStudents = qtyOfStudents;
 		this.name = name;
+		this.qtyOfStudents = qtyOfStudents;
 		this.subjects = subjects;
 	}
 
-	public Faculty(Integer id, int qtyOfStudents, FacultyName name, List<Subjects> subjects) {
-		super();
+	public Faculty(Integer id, String name, int qtyOfStudents, List<Subjects> subjects) {
+
 		this.id = id;
-		this.qtyOfStudents = qtyOfStudents;
 		this.name = name;
+		this.qtyOfStudents = qtyOfStudents;
 		this.subjects = subjects;
 	}
 
@@ -61,11 +61,13 @@ public class Faculty {
 		this.qtyOfStudents = qtyOfStudents;
 	}
 
-	public FacultyName getName() {
+	
+
+	public String getName() {
 		return name;
 	}
 
-	public void setName(FacultyName name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

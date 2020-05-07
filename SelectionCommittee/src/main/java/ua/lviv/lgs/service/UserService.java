@@ -20,10 +20,14 @@ public class UserService {
 	
 	public void seve(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
 		user.setRole(UserRole.ROLE_USER);
 		userRepository.save(user);
 		
 	}
 	
-
+	public User findUserByEmail (String email) {
+		return userRepository.findByEmail(email).get();
+		
+	}
 }

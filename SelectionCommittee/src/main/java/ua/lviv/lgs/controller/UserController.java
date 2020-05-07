@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import ua.lviv.lgs.domain.Entrant;
 import ua.lviv.lgs.domain.User;
+import ua.lviv.lgs.service.EntrantService;
 import ua.lviv.lgs.service.UserService;
 
 @Controller
@@ -18,7 +20,10 @@ public class UserController {
 	@Autowired	
 	private UserService userService;
 	
-	@GetMapping(value = "/registration")
+	@Autowired
+	private EntrantService entrantService;
+	
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
 		
 		model.addAttribute("userForm", new User());
@@ -27,18 +32,18 @@ public class UserController {
 	}
 	
 	
-	@PostMapping(value = "/registration")
-	public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) {
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors())
-			return "/registration";
+			return "registration";
 		
-		userService.seve(user);	
+		userService.seve(userForm);	
 		return "redirect:/home";
 		
 	}
 	
-	@GetMapping(value = {"/", "/login"})
+	 @RequestMapping(value = {"/", "/login"},method = RequestMethod.GET)
 	public String login(Model model, String error, String logout) {
 		
 		if (error != null)
@@ -52,11 +57,17 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping
-	public String welcome(Model model) {
-		
-		return "home";
-		
-	}
+	 @RequestMapping(value ="/home", method = RequestMethod.GET)
+	    public ModelAndView welcome() {
+	    	ModelAndView map = new ModelAndView("home");
+			map.addObject("entrants", entrantService.getAllEntrants());
+			
+	    	return map;
+	    }
+	 
+	 @RequestMapping(value ="/create-entrant", method = RequestMethod.GET)
+	    public ModelAndView createEntrant() {
+	        return new ModelAndView("createEntrant", "entrant", new Entrant());
+	    }
 	
 }
