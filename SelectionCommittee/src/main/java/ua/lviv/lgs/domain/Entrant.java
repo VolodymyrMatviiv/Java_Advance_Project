@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,17 +28,90 @@ public class Entrant {
 	@Column
 	private String lastName;
 
+	@Column(name = "total_mark")
+	private Integer totalMark;
+
+	public Integer getTotalMark() {
+		return totalMark;
+	}
+
+	public void setTotalMark(Integer totalMark) {
+		this.totalMark = totalMark;
+	}
+
 	@ManyToOne()
 	@JoinColumn(name = "fk_faculty")
 	private Faculty faculty;
+
+	@Column(name = "first_subject")
+	private Integer award_first_subject;
+
+	@Column(name = "second_subject")
+	private Integer award_second_subject;
+
+	@Column(name = "third_subject")
+	private Integer award_third_subject;
+
+	@Column(name = "fourth_subject")
+	private Integer award_fourth_subject;
+
+	public Integer getAward_first_subject() {
+		return award_first_subject;
+	}
+
+	public void setAward_first_subject(Integer award_first_subject) {
+		this.award_first_subject = award_first_subject;
+	}
+
+	public Integer getAward_second_subject() {
+		return award_second_subject;
+	}
+
+	public void setAward_second_subject(Integer award_second_subject) {
+		this.award_second_subject = award_second_subject;
+	}
+
+	public Integer getAward_third_subject() {
+		return award_third_subject;
+	}
+
+	public void setAward_third_subject(Integer award_third_subject) {
+		this.award_third_subject = award_third_subject;
+	}
+
+	public Integer getAward_fourth_subject() {
+		return award_fourth_subject;
+	}
+
+	public void setAward_fourth_subject(Integer award_fourth_subject) {
+		this.award_fourth_subject = award_fourth_subject;
+	}
 
 	@ElementCollection(targetClass = Subjects.class)
 	@CollectionTable(name = "EntrantSubjects", joinColumns = @JoinColumn(name = "ENTRANT_ID"))
 	@Column(name = "Subjects", nullable = false)
 	private List<Subjects> subjects;
 
+	@Lob
+	private String encodedImage;
+
 	public Entrant() {
 
+	}
+
+	public Entrant(Integer id, String firstName, String lastName, Faculty faculty, Integer award_first_subject,
+			Integer award_second_subject, Integer award_third_subject, Integer award_fourth_subject,
+			List<Subjects> subjects) {
+
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.faculty = faculty;
+		this.award_first_subject = award_first_subject;
+		this.award_second_subject = award_second_subject;
+		this.award_third_subject = award_third_subject;
+		this.award_fourth_subject = award_fourth_subject;
+		this.subjects = subjects;
 	}
 
 	public Entrant(String firstName, String lastName, Faculty faculty, List<Subjects> subjects) {
@@ -97,6 +171,14 @@ public class Entrant {
 		this.subjects = subjects;
 	}
 
+	public String getEncodedImage() {
+		return encodedImage;
+	}
+
+	public void setEncodedImage(String encodedImage) {
+		this.encodedImage = encodedImage;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -151,4 +233,5 @@ public class Entrant {
 		return "Entrant [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", faculty=" + faculty
 				+ ", subjects=" + subjects + "]";
 	}
+
 }

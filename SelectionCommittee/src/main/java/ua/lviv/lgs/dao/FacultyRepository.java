@@ -7,5 +7,5 @@ import ua.lviv.lgs.domain.Faculty;
 
 @Repository
 public interface FacultyRepository extends JpaRepository<Faculty, Integer> {
-
+	Faculty getById(int id);
 }

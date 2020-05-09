@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ua.lviv.lgs.domain.Entrant;
+//import ua.lviv.lgs.domain.Entrant;
 import ua.lviv.lgs.domain.User;
 import ua.lviv.lgs.service.EntrantService;
 import ua.lviv.lgs.service.UserService;
@@ -35,9 +35,9 @@ public class UserController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
 		
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) {
 			return "registration";
-		
+		}
 		userService.seve(userForm);	
 		return "redirect:/home";
 		
@@ -67,7 +67,8 @@ public class UserController {
 	 
 	 @RequestMapping(value ="/create-entrant", method = RequestMethod.GET)
 	    public ModelAndView createEntrant() {
-	        return new ModelAndView("createEntrant", "entrant", new Entrant());
+//	        return new ModelAndView("createEntrant", "entrant", new Entrant());
+		 	return createEntrant();
 	    }
 	
 }
