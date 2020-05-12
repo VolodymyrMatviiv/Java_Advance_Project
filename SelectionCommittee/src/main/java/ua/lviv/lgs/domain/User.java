@@ -34,7 +34,7 @@ public class User {
 	private String passwordConfirm;
 	
 	@Enumerated(EnumType.STRING)
-	private UserRole role;
+	private String role;
 
 	public User() {
 	}
@@ -47,7 +47,7 @@ public class User {
 		this.role = user.role;
 	}
 
-	public User(String firstName, String lastName, String email, String password, UserRole role) {
+	public User(String firstName, String lastName, String email, String password, String role) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -57,7 +57,7 @@ public class User {
 	}
 
 	public User(Integer id, String firstName, String lastName, String email, String password, String passwordConfirm,
-			UserRole role) {
+			String role) {
 
 		this.id = id;
 		this.firstName = firstName;
@@ -108,11 +108,11 @@ public class User {
 		this.password = password;
 	}
 
-	public UserRole getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(UserRole role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

@@ -38,7 +38,16 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
-		userService.seve(userForm);	
+		System.out.println(userForm.getRole());
+        if(userForm.getRole().toString().equals("Admin")) {
+        	userForm.setRole("ROLE_ADMIN");
+        	userService.seve(userForm);
+        }
+        else {
+        	userForm.setRole("ROLE_USER");
+        	userService.seve(userForm);
+        }
+
 		return "redirect:/home";
 		
 	}
