@@ -1,11 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -33,6 +34,22 @@
 <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var selItem = localStorage.getItem("locales");
+			$('#locales').val(selItem ? selItem : 'en');
+			$("#locales").change(function() {
+				var selectedOption = $('#locales').val();
+				if (selectedOption) {
+					window.location.replace('?lang=' + selectedOption);
+					localStorage.setItem("locales", selectedOption);
+				}
+			});
+		});
+	</script>
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 	    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,16 +61,26 @@
 		<div class="form">
 
 			<form method="POST" action="${contextPath}/login" class="login-form">
-				<h2 class="form-heading">Log in</h2>
+				<h2 class="form-heading"><spring:message code="login.title1" /></h2>
 
 				<div class="form-group ${error != null ? 'has-error' : ''}">
 					<span>${message}</span> 
-					<input name="email" type="text"	class="email" placeholder="Email" autofocus="true" /> 
-					<input name="password" type="password" class="password" placeholder="Password" /> 
+					<input name="email" type="text"	class="email" placeholder="<spring:message code="login.email" />" autofocus="true" /> 
+					<input name="password" type="password" class="password" placeholder="<spring:message code="login.password" />" /> 
 					<span>${error}</span> 
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-					<button class="login" type="submit" >Log In</button>
+					<button class="login" type="submit" ><spring:message code="login.login" /></button>
+					
+					<div class="text-center p-t-12">
+						<fieldset>
+							<label><spring:message code="login.choose_language" /></label> <select
+								class="text-center p-t-12" id="locales">
+								<option value="en"><spring:message code='login.english' /></option>
+								<option value="uk"><spring:message code='login.ukrainian' /></option>
+							</select>
+						</fieldset>
+					</div>
 					<p class="message">
 						<a href="${contextPath}/registration">Create an account</a>
 					</p>
