@@ -59,11 +59,11 @@
 					<table>
 						<tr>
 							<td>FirstName</td>
-							<td><input type="text" name="firstName" /></td>
+							<td><input type="text" name="firstName" placeholder="Name" required=""></td>
 						</tr>
 						<tr>
 							<td>LastName</td>
-							<td><input type="text" name="lastName" /></td>
+							<td><input type="text" name="lastName" placeholder="Last Name" required=""></td>
 						</tr>
 				
 						<tr>
@@ -92,19 +92,19 @@
 						</tr>
 						<tr>
 							<td>First Subject</td>
-							<td><input type="text" name="firstSubject" /></td>
+							<td><input type="text" name="firstSubject" placeholder="First Subject" required=""></td>
 						</tr>
 						<tr>
 							<td>Second Subject</td>
-							<td><input type="text" name="secondSubject" /></td>
+							<td><input type="text" name="secondSubject" placeholder="Second Subject" required=""></td>
 						</tr>
 						<tr>
 							<td>Third Subject</td>
-							<td><input type="text" name="thirdSubject" /></td>
+							<td><input type="text" name="thirdSubject" placeholder="Third Subject" required=""></td>
 						</tr>
 						<tr class = "style">
 							<td>Fourth Subject</td>
-							<td><input type="text" name="fourthSubject" /></td>
+							<td><input type="text" name="fourthSubject" placeholder="Fourth Subject" required=""></td>
 						</tr>
 						
 						
