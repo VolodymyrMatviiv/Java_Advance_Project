@@ -1,12 +1,13 @@
 package ua.lviv.lgs.SelectionCommittee;
 
+
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ua.lviv.lgs.dao.EntrantRepository;
 import ua.lviv.lgs.dao.FacultyRepository;
 import ua.lviv.lgs.dao.UserRepository;
-import ua.lviv.lgs.domain.User;
 import ua.lviv.lgs.domain.Entrant;
 import ua.lviv.lgs.domain.Faculty;
 import ua.lviv.lgs.domain.Subjects;
-
+import ua.lviv.lgs.domain.User;
 import ua.lviv.lgs.service.EntrantService;
 import ua.lviv.lgs.service.UserService;
 
@@ -174,5 +174,6 @@ class SelectionCommitteeApplicationTests {
 		assertTrue(entrantFromDB2.getSubjects().equals(entrant2.getSubjects()));
 	}
 
+	
 	
 }
